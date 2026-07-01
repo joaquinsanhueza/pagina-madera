@@ -312,4 +312,84 @@
     goTo(0);
   }
 
+  /* ---- CARRUSEL VIDEOS ---- */
+  const vidTrack    = document.getElementById('vidTrack');
+  const vidViewport = document.getElementById('vidViewport');
+  const vidPrev     = document.getElementById('vidArrowPrev');
+  const vidNext     = document.getElementById('vidArrowNext');
+  const vidDotsWrap = document.getElementById('vidDots');
+
+  if (vidTrack && vidViewport && vidPrev && vidNext) {
+    const vidSlides = Array.from(vidTrack.querySelectorAll('.galeria-slide'));
+    const totalVid  = vidSlides.length;
+    let vidCurrent  = 0;
+
+    function getVidVisible() {
+      if (window.innerWidth <= 500) return 1;
+      if (window.innerWidth <= 768) return 2;
+      return 3;
+    }
+
+    function totalVidPages() {
+      return Math.ceil(totalVid / getVidVisible());
+    }
+
+    function buildVidDots() {
+      vidDotsWrap.innerHTML = '';
+      for (let i = 0; i < totalVidPages(); i++) {
+        const d = document.createElement('button');
+        d.className = 'carousel-dot' + (i === vidCurrent ? ' active' : '');
+        d.setAttribute('aria-label', `Página ${i + 1}`);
+        d.addEventListener('click', () => goVidTo(i));
+        vidDotsWrap.appendChild(d);
+      }
+    }
+
+    function updateVidDots() {
+      vidDotsWrap.querySelectorAll('.carousel-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === vidCurrent);
+      });
+    }
+
+    function goVidTo(page) {
+      // Pausar videos del grupo actual antes de mover
+      const vis = getVidVisible();
+      const from = vidCurrent * vis;
+      for (let i = from; i < from + vis && i < totalVid; i++) {
+        const v = vidSlides[i].querySelector('video');
+        if (v && !v.paused) v.pause();
+      }
+
+      const pages = totalVidPages();
+      vidCurrent = Math.max(0, Math.min(page, pages - 1));
+      const slideW = vidSlides[0].getBoundingClientRect().width;
+      const gap = 10;
+      const offset = vidCurrent * vis * (slideW + gap);
+      vidTrack.style.transform = `translateX(-${offset}px)`;
+      vidPrev.disabled = vidCurrent === 0;
+      vidNext.disabled = vidCurrent >= pages - 1;
+      updateVidDots();
+    }
+
+    vidPrev.addEventListener('click', () => goVidTo(vidCurrent - 1));
+    vidNext.addEventListener('click', () => goVidTo(vidCurrent + 1));
+
+    window.addEventListener('resize', () => {
+      vidCurrent = 0;
+      buildVidDots();
+      goVidTo(0);
+    });
+
+    // Swipe táctil
+    let vidTouchX = 0;
+    vidViewport.addEventListener('touchstart', e => { vidTouchX = e.touches[0].clientX; }, { passive: true });
+    vidViewport.addEventListener('touchend', e => {
+      const diff = vidTouchX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) diff > 0 ? goVidTo(vidCurrent + 1) : goVidTo(vidCurrent - 1);
+    }, { passive: true });
+
+    buildVidDots();
+    goVidTo(0);
+  }
+
 })();

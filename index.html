@@ -26,6 +26,7 @@
         <li><a href="#productos">Productos</a></li>
         <li><a href="#nosotros">Nosotros</a></li>
         <li><a href="#galeria">Galería</a></li>
+        <li><a href="#proyectos">Proyectos</a></li>
         <li><a href="#contacto">Contacto</a></li>
       </ul>
       <a href="#contacto" class="nav-cta">Cotizar</a>
@@ -37,6 +38,7 @@
       <a href="#productos">Productos</a>
       <a href="#nosotros">Nosotros</a>
       <a href="#galeria">Galería</a>
+      <a href="#proyectos">Proyectos</a>
       <a href="#contacto">Contacto</a>
     </div>
   </nav>
@@ -318,6 +320,67 @@
 
     <!-- Puntos de navegación -->
     <div class="carousel-dots" id="carouselDots"></div>
+  </section>
+
+
+
+  <!-- PROYECTOS VIDEO -->
+  <section class="proyectos-video" id="proyectos">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-eyebrow">En acción</p>
+        <h2 class="section-title">Una muestra de mis proyectos</h2>
+      </div>
+    </div>
+
+    <!-- CARRUSEL DE VIDEOS: misma estructura que galería -->
+    <div class="galeria-carousel-wrap">
+
+      <!-- Flecha izquierda -->
+      <button class="carousel-arrow arrow-prev" id="vidArrowPrev" aria-label="Anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+      </button>
+
+      <!-- Viewport -->
+      <div class="galeria-carousel-viewport" id="vidViewport">
+        <div class="galeria-carousel-track" id="vidTrack">
+
+          <!-- Video 1 -->
+          <div class="galeria-slide vid-slide">
+            <video src="vid/video-1.mp4" controls preload="none" playsinline></video>
+          </div>
+
+          <!-- Video 2 -->
+          <div class="galeria-slide vid-slide">
+            <video src="vid/video-2.mp4" controls preload="none" playsinline></video>
+          </div>
+
+          <!-- Video 3 -->
+          <div class="galeria-slide vid-slide">
+            <video src="vid/video-3.mp4" controls preload="none" playsinline></video>
+          </div>
+
+          <!-- Video 4 -->
+          <div class="galeria-slide vid-slide">
+            <video src="vid/video-4.mp4" controls preload="none" playsinline></video>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Flecha derecha -->
+      <button class="carousel-arrow arrow-next" id="vidArrowNext" aria-label="Siguiente">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </button>
+
+    </div>
+
+    <!-- Puntos de navegación -->
+    <div class="carousel-dots" id="vidDots"></div>
   </section>
 
 

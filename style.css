@@ -816,6 +816,39 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   .arrow-prev { margin-right: 6px; }
   .arrow-next { margin-left: 6px; }
 }
+}
+
+
+/* =============================================
+   PROYECTOS VIDEO
+   ============================================= */
+.proyectos-video {
+  padding: 7rem 0 4rem;
+  background: var(--cream-dk);
+}
+.proyectos-video .container { margin-bottom: 3rem; }
+
+/* Los slides de video usan la misma clase .galeria-slide
+   pero el video ocupa todo el espacio */
+.vid-slide {
+  background: var(--brown);
+}
+.vid-slide video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Responsive tablet */
+@media (max-width: 768px) {
+  .proyectos-video { padding: 4rem 0 2.5rem; }
+}
+
+/* Responsive móvil */
+@media (max-width: 500px) {
+  .vid-slide video { object-fit: contain; }
+}
 
 
 /* =============================================
