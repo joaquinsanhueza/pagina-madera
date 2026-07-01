@@ -828,26 +828,33 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 }
 .proyectos-video .container { margin-bottom: 3rem; }
 
-/* Los slides de video usan la misma clase .galeria-slide
-   pero el video ocupa todo el espacio */
+/* Los slides de video sobreescriben el comportamiento de imagen */
 .vid-slide {
   background: var(--brown);
+  overflow: visible;   /* permite que los controles no queden cortados */
+  height: auto;        /* alto natural del video */
+  cursor: default;
+  display: flex;
+  flex-direction: column;
 }
 .vid-slide video {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: 300px;       /* alto fijo cómodo para todos los videos */
+  object-fit: contain; /* muestra el video completo sin recorte */
   display: block;
+  border-radius: 6px;
+  background: #111;    /* fondo negro mientras carga */
 }
 
 /* Responsive tablet */
 @media (max-width: 768px) {
   .proyectos-video { padding: 4rem 0 2.5rem; }
+  .vid-slide video { height: 220px; }
 }
 
 /* Responsive móvil */
 @media (max-width: 500px) {
-  .vid-slide video { object-fit: contain; }
+  .vid-slide video { height: 200px; }
 }
 
 
