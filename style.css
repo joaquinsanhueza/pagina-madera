@@ -831,19 +831,57 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 /* Los slides de video sobreescriben el comportamiento de imagen */
 .vid-slide {
   background: var(--brown);
-  overflow: visible;   /* permite que los controles no queden cortados */
-  height: auto;        /* alto natural del video */
-  cursor: default;
-  display: flex;
-  flex-direction: column;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
 }
 .vid-slide video {
   width: 100%;
-  height: 300px;       /* alto fijo cómodo para todos los videos */
-  object-fit: contain; /* muestra el video completo sin recorte */
+  height: 100%;
+  object-fit: cover;
   display: block;
-  border-radius: 6px;
-  background: #111;    /* fondo negro mientras carga */
+  border-radius: 0;
+}
+
+/* Overlay con botón de play */
+.vid-play-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(
+    to top,
+    rgba(20,10,3,.55) 0%,
+    rgba(20,10,3,.1) 60%,
+    transparent 100%
+  );
+  transition: opacity .3s ease;
+  pointer-events: none; /* los clics pasan al video */
+  z-index: 1;
+}
+.vid-slide.playing .vid-play-overlay {
+  opacity: 0;
+}
+.vid-play-btn {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--amber);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 28px rgba(181,113,42,.55), 0 0 0 8px rgba(181,113,42,.2);
+  transition: transform .25s var(--ease), box-shadow .25s;
+}
+.vid-play-btn svg {
+  width: 26px; height: 26px;
+  color: #fff;
+  margin-left: 4px; /* centra visualmente el triángulo */
+}
+.vid-slide:hover .vid-play-btn {
+  transform: scale(1.12);
+  box-shadow: 0 8px 36px rgba(181,113,42,.7), 0 0 0 12px rgba(181,113,42,.18);
 }
 
 /* Responsive tablet */

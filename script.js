@@ -312,7 +312,15 @@
     goTo(0);
   }
 
-  /* ---- CARRUSEL VIDEOS ---- */
+  /* ---- PLAY OVERLAY en videos ---- */
+  document.querySelectorAll('.vid-player').forEach(vid => {
+    const slide = vid.closest('.vid-slide');
+    vid.addEventListener('play',  () => slide.classList.add('playing'));
+    vid.addEventListener('pause', () => slide.classList.remove('playing'));
+    vid.addEventListener('ended', () => slide.classList.remove('playing'));
+  });
+
+
   const vidTrack    = document.getElementById('vidTrack');
   const vidViewport = document.getElementById('vidViewport');
   const vidPrev     = document.getElementById('vidArrowPrev');
